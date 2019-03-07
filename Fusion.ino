@@ -185,7 +185,7 @@ analogWrite(ENB,60);}
 
 
 
- if( distance_mm3 < 75 && distance_mm3 > 1) { /// CAPTEUR 1 à -50mm)
+ while( distance_mm3 < 75 && distance_mm3 > 1) { /// CAPTEUR 1 à -50mm)
 /// ON REFAIT LA MESURE ///
   digitalWrite(TRIGGER_PIN3, HIGH);
   delayMicroseconds(10);
@@ -232,7 +232,7 @@ analogWrite(DEL,255);}  }
   float distance_mm4 = measure / 2.0 * SOUND_SPEED;
 /// MESURE FINIE ///
 // on re-analyse la distance pour vérifier//
-if (distance_mm4 < 75) {
+while (distance_mm4 < 75 && distance_mm4 > 1) {
 Serial.println("VERIFICATION DU CAPTEUR 4 :ARRET MOTEUR");
 
 digitalWrite(motorPin1, LOW); 
@@ -241,7 +241,17 @@ digitalWrite(motorPin3, LOW);
 digitalWrite(motorPin4, LOW);
 digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
-analogWrite(DEL,255);}  }
+analogWrite(DEL,255);
+
+digitalWrite(TRIGGER_PIN4, HIGH); /// ON REFAIT LA MESURE
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER_PIN4, LOW);
+  long measure = pulseIn(ECHO_PIN4, HIGH, MEASURE_TIMEOUT);
+  float distance_mm4 = measure / 2.0 * SOUND_SPEED;
+  
+                        }                 }
+
+
 ///////////////////////////////////////////
 
 
@@ -258,14 +268,20 @@ if( distance_mm < 51 && distance_mm > 1) { /// CAPTEUR 1 à -50mm)
   float distance_mm = measure / 2.0 * SOUND_SPEED;
 /// MESURE FINIE ///
 // on re-analyse la distance pour vérifier//
-if (distance_mm < 51) {
+while (distance_mm < 51 && distance_mm > 1) {
 Serial.println("VERIFICATION DU CAPTEUR 1 : A 5CM DU MUR");
-}
+  digitalWrite(TRIGGER_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER_PIN, LOW);
+  long measure = pulseIn(ECHO_PIN, HIGH, MEASURE_TIMEOUT);
+  float distance_mm = measure / 2.0 * SOUND_SPEED;
+                        }               }
 
 
 
 
- if( distance_mm2 < 51 && distance_mm2 > 1) { /// CAPTEUR 1 à -50mm)
+ if( distance_mm2 < 51 && distance_mm2 > 1) /// CAPTEUR 1 à -50mm)
+{ 
 /// ON REFAIT LA MESURE ///
   digitalWrite(TRIGGER_PIN2, HIGH);
   delayMicroseconds(10);
@@ -274,9 +290,18 @@ Serial.println("VERIFICATION DU CAPTEUR 1 : A 5CM DU MUR");
   float distance_mm2 = measure / 2.0 * SOUND_SPEED;
 /// MESURE FINIE ///
 // on re-analyse la distance pour vérifier//
-if (distance_mm2 < 51) {
+while (distance_mm2 < 51 && distance_mm2 > 1) {
 Serial.println("VERIFICATION DU CAPTEUR 2 : a 5 CM");
-analogWrite(DEL,255);}  }
+analogWrite(DEL,255);
+// ON REFAIT LA MESURE ///
+  digitalWrite(TRIGGER_PIN2, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER_PIN2, LOW);
+  long measure = pulseIn(ECHO_PIN2, HIGH, MEASURE_TIMEOUT);
+  float distance_mm2 = measure / 2.0 * SOUND_SPEED;
+                                          } 
+
+}
   
 
 
@@ -284,11 +309,7 @@ analogWrite(DEL,255);}  }
 
 
 
-  delay(timetostart); // voir "timetostart" au début. permet de définir le nb de milliseconde avant que le programme se relance
-if(distance_mm > 51) {digitalWrite(DEL,LOW);}
-if(distance_mm2 > 51) {digitalWrite(DEL,LOW);}
-if(distance_mm3 > 75) {digitalWrite(DEL,LOW);}
-if(distance_mm4 > 75) {digitalWrite(DEL,LOW);} }
+  delay(timetostart); // voir "timetostart" au début. permet de définir le nb de milliseconde avant que le programme se relance }
 
 
 
