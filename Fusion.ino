@@ -80,7 +80,7 @@ void loop() {
 
 
 
-state = Serial.parseInt();
+// state = Serial.parseInt();
 
 
 /*
@@ -97,14 +97,14 @@ digitalWrite(motorPin4, LOW);
 } */
 
 
-if (state == Av){Serial.println("Avant");
+
 
 digitalWrite(motorPin1, LOW); 
 digitalWrite(motorPin2, HIGH);
 digitalWrite(motorPin3, HIGH); 
 digitalWrite(motorPin4, LOW);
 analogWrite(ENA,60);
-analogWrite(ENB,60); }                                     
+analogWrite(ENB,60); 
 
 if (state == Ar){Serial.println("Arriere");
 
@@ -184,6 +184,29 @@ analogWrite(ENB,60);}
   Serial.print(F("mm (")); 
 
 
+
+ if( distance_mm3 < 75 && distance_mm3 > 1) { /// CAPTEUR 1 à -50mm)
+/// ON REFAIT LA MESURE ///
+  digitalWrite(TRIGGER_PIN3, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER_PIN3, LOW);
+  long measure = pulseIn(ECHO_PIN3, HIGH, MEASURE_TIMEOUT);
+  float distance_mm3 = measure / 2.0 * SOUND_SPEED;
+/// MESURE FINIE ///
+// on re-analyse la distance pour vérifier//
+if (distance_mm3 < 75) {
+Serial.println("VERIFICATION DU CAPTEUR 3 :ARRET MOTEUR");
+
+digitalWrite(motorPin1, LOW); 
+digitalWrite(motorPin2, LOW);
+digitalWrite(motorPin3, LOW); 
+digitalWrite(motorPin4, LOW);
+
+
+analogWrite(DEL,255);}  }
+
+
+
 /////////////////MESURE CAPTEUR 4 /////////
 
 
@@ -197,6 +220,28 @@ analogWrite(ENB,60);}
   Serial.print(F("                Distance Capteur 4 : "));
   Serial.print(distance_mm4);
   Serial.println(F("mm ("));  /// et là on met enfin le println
+
+
+ if( distance_mm4 < 75 && distance_mm4 > 1) { /// CAPTEUR 1 à -50mm)
+/// ON REFAIT LA MESURE ///
+  digitalWrite(TRIGGER_PIN4, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER_PIN4, LOW);
+  long measure = pulseIn(ECHO_PIN4, HIGH, MEASURE_TIMEOUT);
+  float distance_mm4 = measure / 2.0 * SOUND_SPEED;
+/// MESURE FINIE ///
+// on re-analyse la distance pour vérifier//
+if (distance_mm4 < 75) {
+Serial.println("VERIFICATION DU CAPTEUR 4 :ARRET MOTEUR");
+
+digitalWrite(motorPin1, LOW); 
+digitalWrite(motorPin2, LOW);
+digitalWrite(motorPin3, LOW); 
+digitalWrite(motorPin4, LOW);
+
+analogWrite(DEL,255);}  }
+///////////////////////////////////////////
+
 
 
 
@@ -233,44 +278,8 @@ analogWrite(DEL,255);}  }
   
 
 
- if( distance_mm3 < 75 && distance_mm3 > 1) { /// CAPTEUR 1 à -50mm)
-/// ON REFAIT LA MESURE ///
-  digitalWrite(TRIGGER_PIN3, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIGGER_PIN3, LOW);
-  long measure = pulseIn(ECHO_PIN3, HIGH, MEASURE_TIMEOUT);
-  float distance_mm3 = measure / 2.0 * SOUND_SPEED;
-/// MESURE FINIE ///
-// on re-analyse la distance pour vérifier//
-if (distance_mm3 < 75) {
-Serial.println("VERIFICATION DU CAPTEUR 3 :ARRET MOTEUR");
-
-digitalWrite(motorPin1, LOW); 
-digitalWrite(motorPin2, LOW);
-digitalWrite(motorPin3, LOW); 
-digitalWrite(motorPin4, LOW);
-
-analogWrite(DEL,255);}  }
 
 
- if( distance_mm4 < 75 && distance_mm4 > 1) { /// CAPTEUR 1 à -50mm)
-/// ON REFAIT LA MESURE ///
-  digitalWrite(TRIGGER_PIN4, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIGGER_PIN4, LOW);
-  long measure = pulseIn(ECHO_PIN4, HIGH, MEASURE_TIMEOUT);
-  float distance_mm4 = measure / 2.0 * SOUND_SPEED;
-/// MESURE FINIE ///
-// on re-analyse la distance pour vérifier//
-if (distance_mm4 < 75) {
-Serial.println("VERIFICATION DU CAPTEUR 4 :ARRET MOTEUR");
-
-digitalWrite(motorPin1, LOW); 
-digitalWrite(motorPin2, LOW);
-digitalWrite(motorPin3, LOW); 
-digitalWrite(motorPin4, LOW);
-
-analogWrite(DEL,255);}  }
 
 
   delay(timetostart); // voir "timetostart" au début. permet de définir le nb de milliseconde avant que le programme se relance
