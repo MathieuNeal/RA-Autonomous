@@ -201,7 +201,8 @@ digitalWrite(motorPin1, LOW);
 digitalWrite(motorPin2, LOW);
 digitalWrite(motorPin3, LOW); 
 digitalWrite(motorPin4, LOW);
-
+digitalWrite(ENA,LOW);
+digitalWrite(ENB,LOW);
 
 analogWrite(DEL,255);}  }
 
@@ -238,7 +239,8 @@ digitalWrite(motorPin1, LOW);
 digitalWrite(motorPin2, LOW);
 digitalWrite(motorPin3, LOW); 
 digitalWrite(motorPin4, LOW);
-
+digitalWrite(ENA,LOW);
+digitalWrite(ENB,LOW);
 analogWrite(DEL,255);}  }
 ///////////////////////////////////////////
 
