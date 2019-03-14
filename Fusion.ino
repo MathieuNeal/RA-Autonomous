@@ -1,3 +1,7 @@
+int emp;
+
+
+
 /// PIN KIKO ///
 #include <Wire.h>
 #include <VL53L0X.h>
@@ -56,7 +60,7 @@ const byte DEL = 11;
 ///
 void setup() {
   Serial.begin(115200);
-  
+  emp = 0;
   
 // SETUP KIKO //
    medium = 0;
@@ -118,16 +122,13 @@ Serial.println("Fourche optique - detection de presence");
 void loop() {
 
 
-
+if(emp == 0){
 digitalWrite(motorPin1, LOW); 
 digitalWrite(motorPin2, HIGH);
 digitalWrite(motorPin3, HIGH); 
 digitalWrite(motorPin4, LOW);
 analogWrite(ENA,60);
 analogWrite(ENB,60); 
-
-
-
 mesureultrason1();
 
 mesureultrason2();
@@ -136,7 +137,7 @@ mesureultrason3();
 
 mesureultrason4();
 
-capteurlaser();
+capteurlaser(); }
 
 
 
@@ -452,12 +453,14 @@ if(cote != 0) {
 
 
  
-  delay(timetostart); 
+ // delay(timetostart); 
   } 
 
 
   
-
+void emp() {
+  
+}
 
 
 
