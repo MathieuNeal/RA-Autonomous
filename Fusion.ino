@@ -186,7 +186,11 @@ digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
 }
 
-
+void demitour() {
+  
+  
+  
+}
  void initcapteur() {
     //SENSOR
   pinMode(46, INPUT);
