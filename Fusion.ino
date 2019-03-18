@@ -1,4 +1,7 @@
-int emp;
+
+
+
+int emp = 0; // 0 = Orange ; 1 = Violet
 
 
 
