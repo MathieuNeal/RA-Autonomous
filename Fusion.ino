@@ -1,6 +1,7 @@
 
 
 
+int Fourchestart = 38;
 int emp = 0; // 0 = Orange ; 1 = Violet
 
 
@@ -118,6 +119,8 @@ pinMode(fourchePin, INPUT);  //en entrée
 Serial.println("Fourche optique - detection de presence");
 //
 
+pinMode(Fourchestart, INPUT); // Fourche de start
+  
 
 
 }
