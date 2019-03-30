@@ -1,3 +1,10 @@
+
+#include <Servo.h>
+
+Servo myservo; 
+int pastservo=0;
+
+int cote;
 int lastetat; 
 int cmpfourche=0;
 
@@ -22,9 +29,13 @@ int EtatFourche = 0 ;
 int CMPFOURCHE1 = 0; 
 
 void setup() {
-
-
+  
+myservo.attach(9);
+pastservo=0;
 emp = 0;
+
+pinMode(A5, INPUT_PULLUP);
+
 
 pinMode(ENA,OUTPUT);
 pinMode(ENB,OUTPUT);
@@ -38,25 +49,40 @@ Serial.begin(9600);
   Serial.println("Initialisation");
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(inputPin, INPUT);     // declare pushbutton as input
+
+
+  myservo.write(130);
+
+  
+int sensorVal = digitalRead(A5);
+  
 }
 
 void loop(){
 
 
+if (pastservo != 1){
+  myservo.write(50);
+}
 
 
 
   
   int val = digitalRead(inputPin);  // read input value
   if (val == HIGH) {       
-   
-    
+   pastservo=1;
+    myservo.write(130);
   digitalWrite(motorPin1, HIGH); 
 digitalWrite(motorPin2, HIGH);
 digitalWrite(motorPin3, HIGH); 
 digitalWrite(motorPin4, HIGH);
 digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
+
+
+// if (cote != 1) { turnleft();}
+// if (cote == 1) { turnright();}
+
     
     delay(2000);
  digitalWrite(motorPin1, HIGH); 
@@ -106,11 +132,31 @@ digitalWrite(ENB,LOW);
 
 lastetat = EtatFourche;
   }
-
-
-
-
-
-
   
+}
+
+
+void turnleft(){
+digitalWrite(motorPin1, HIGH); 
+digitalWrite(motorPin2, LOW);
+digitalWrite(motorPin3, HIGH); 
+digitalWrite(motorPin4, LOW);
+
+
+analogWrite(ENA,60);
+analogWrite(ENB,60);
+delay(50);
+}
+
+
+void turnright() {
+    digitalWrite(motorPin1, LOW); 
+digitalWrite(motorPin2, HIGH);
+digitalWrite(motorPin3, LOW); 
+digitalWrite(motorPin4, HIGH);
+
+
+analogWrite(ENA,60);
+analogWrite(ENB,60);
+delay(50);
 }
