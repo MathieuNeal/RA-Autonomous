@@ -1,7 +1,8 @@
 
 #include <Servo.h>
-
-Servo myservo; 
+Servo myservo;  
+Servo myservo2;
+int pos;
 int pastservo=0;
 
 int cote;
@@ -19,10 +20,7 @@ int motorPin3 = 42;                                       //Motorpin 3 sera bran
 int motorPin4 = 43;                                      //Motorpin 4 sera branché sur la broche 43 de la mega
 int ENA=11;   
 int ENB=12;
-int Av = 1;
-int Ar = 2;
-int St = 3;
-int Tu = 4;
+
 int state = 10;
 const int fourchePin = 8;
 int EtatFourche = 0 ;
@@ -36,6 +34,9 @@ emp = 0;
 
 pinMode(A5, INPUT_PULLUP);
 
+  myservo2.attach(10); 
+
+  myservo.attach(9);
 
 pinMode(ENA,OUTPUT);
 pinMode(ENB,OUTPUT);
@@ -51,9 +52,11 @@ Serial.begin(230400);
   pinMode(inputPin, INPUT);     // declare pushbutton as input
 
 
-  myservo.write(130);
+  myservo.write(90);
 
-  
+    delay(2000); 
+  Serial.println("On abaisse le bras");
+  myservo.write(179);
   
 int cote = digitalRead(A5); // DEFINIR SENS DU SWITCH
 }
@@ -62,7 +65,9 @@ void loop(){
 
 
 if (pastservo != 1){
-  myservo.write(50);
+//  delay(2000); 
+//  Serial.println("On abaisse le bras");
+  myservo.write(179);
 }
 
 
@@ -71,7 +76,7 @@ if (pastservo != 1){
   int val = digitalRead(inputPin);  // read input value
   if (val == HIGH) {       
    pastservo=1;
-    myservo.write(130);
+    myservo.write(90);
   digitalWrite(motorPin1, HIGH); 
 digitalWrite(motorPin2, HIGH);
 digitalWrite(motorPin3, HIGH); 
@@ -91,7 +96,6 @@ digitalWrite(motorPin3, HIGH);
 digitalWrite(motorPin4, LOW);
 analogWrite(ENA,60);
 analogWrite(ENB,60); 
-delay(3000);
 emp = 1;
 Serial.println("Emp changé");
   /// ON APPUIE 
@@ -116,14 +120,27 @@ if (emp != 0) {
    
 Serial.print("          CMP: ");
 Serial.println(cmpfourche);
-while( cmpfourche > 40){
+while( cmpfourche > 80){
  Serial.println("Mission accomplie");
+
+
+
 digitalWrite(motorPin1, HIGH); 
 digitalWrite(motorPin2, HIGH);
 digitalWrite(motorPin3, HIGH); 
 digitalWrite(motorPin4, HIGH);
 digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
+
+ for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo2.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(5);                       // waits 15ms for the servo to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    myservo2.write(pos);            // tell servo to go to position in variable 'pos'
+    delay(5);                       // waits 15ms for the servo to reach the position
+  }
 
 }
    
