@@ -27,8 +27,6 @@ int EtatFourche = 0 ;
 int CMPFOURCHE1 = 0; 
 
 void setup() {
-  
-myservo.attach(9);
 pastservo=0;
 emp = 0;
 
@@ -46,18 +44,16 @@ pinMode(motorPin3, OUTPUT);
 pinMode(motorPin4, OUTPUT);
 digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
-Serial.begin(230400);
+ Serial.begin(230400);
   Serial.println("Initialisation");
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(inputPin, INPUT);     // declare pushbutton as input
 
-
-  myservo.write(90);
-
-    delay(2000); 
+    delay(1000); 
   Serial.println("On abaisse le bras");
-  myservo.write(179);
+  myservo.write(175);
   
+   delay(1000); 
 int cote = digitalRead(A5); // DEFINIR SENS DU SWITCH
 }
 
@@ -67,7 +63,7 @@ void loop(){
 if (pastservo != 1){
 //  delay(2000); 
 //  Serial.println("On abaisse le bras");
-  myservo.write(179);
+  myservo.write(175);
 }
 
 
@@ -109,7 +105,7 @@ digitalWrite(motorPin3, LOW);
 digitalWrite(motorPin4, HIGH);
 analogWrite(ENA,60);
 analogWrite(ENB,60); 
-    digitalWrite(ledPin, HIGH); // turn LED ON
+ 
 
 
 if (emp != 0) {
@@ -120,7 +116,7 @@ if (emp != 0) {
    
 Serial.print("          CMP: ");
 Serial.println(cmpfourche);
-while( cmpfourche > 80){
+while( cmpfourche > 40){
  Serial.println("Mission accomplie");
 
 
@@ -148,7 +144,7 @@ digitalWrite(ENB,LOW);
 
 
 lastetat = EtatFourche;
-  }
+  } // FIN DU BOUTON
   
 }
 
