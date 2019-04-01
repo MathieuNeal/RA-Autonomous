@@ -45,7 +45,7 @@ pinMode(motorPin3, OUTPUT);
 pinMode(motorPin4, OUTPUT);
 digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
-Serial.begin(9600);
+Serial.begin(230400);
   Serial.println("Initialisation");
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(inputPin, INPUT);     // declare pushbutton as input
@@ -54,8 +54,8 @@ Serial.begin(9600);
   myservo.write(130);
 
   
-int sensorVal = digitalRead(A5);
   
+int cote = digitalRead(A5); // DEFINIR SENS DU SWITCH
 }
 
 void loop(){
@@ -80,8 +80,8 @@ digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
 
 
-// if (cote != 1) { turnleft();}
-// if (cote == 1) { turnright();}
+ if (cote != 1) { turnright(); Serial.println("TOURNE A GAUCHE"); }
+ if (cote == 1) { turnleft(); Serial.println("TOURNE A DROITE"); }
 
     
     delay(2000);
@@ -139,8 +139,8 @@ lastetat = EtatFourche;
 void turnleft(){
 digitalWrite(motorPin1, HIGH); 
 digitalWrite(motorPin2, LOW);
-digitalWrite(motorPin3, HIGH); 
-digitalWrite(motorPin4, LOW);
+digitalWrite(motorPin3, LOW); 
+digitalWrite(motorPin4, HIGH);
 
 
 analogWrite(ENA,60);
@@ -152,8 +152,8 @@ delay(50);
 void turnright() {
     digitalWrite(motorPin1, LOW); 
 digitalWrite(motorPin2, HIGH);
-digitalWrite(motorPin3, LOW); 
-digitalWrite(motorPin4, HIGH);
+digitalWrite(motorPin3, HIGH); 
+digitalWrite(motorPin4, LOW);
 
 
 analogWrite(ENA,60);
