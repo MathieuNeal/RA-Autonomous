@@ -28,7 +28,7 @@ int CMPFOURCHE1 = 0;
 
 
 
-/Cale (FOURCHE OPTIQUE)
+//Cale (FOURCHE OPTIQUE)
 int cale = 36;
 
 void setup() {
@@ -62,14 +62,14 @@ digitalWrite(ENB,LOW);
 int cote = digitalRead(A5); // DEFINIR SENS DU SWITCH
 
 
-///////////////////
+
 
 while(digitalRead (cale) != 0) {
   digitalWrite(13, HIGH);
   delay(20);
   digitalWrite(13,LOW); }
 
-//////////////////
+
 }
 
 void loop(){
@@ -80,7 +80,8 @@ void loop(){
 if (pastservo != 1){
 //  delay(2000); 
 //  Serial.println("On abaisse le bras");
-  myservo.write(175);
+ brasdown();
+ 
 }
 
 
@@ -145,15 +146,7 @@ digitalWrite(motorPin4, HIGH);
 digitalWrite(ENA,LOW);
 digitalWrite(ENB,LOW);
 
- for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-    myservo2.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
-  }
-  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-    myservo2.write(pos);            // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
-  }
+exp2();
 
 }
    
@@ -163,30 +156,34 @@ digitalWrite(ENB,LOW);
 lastetat = EtatFourche;
   } // FIN DU BOUTON
   
-}
+} //// FIN DU VOIDLOOP
 
 
-void turnleft(){
-digitalWrite(motorPin1, HIGH); 
-digitalWrite(motorPin2, LOW);
-digitalWrite(motorPin3, LOW); 
-digitalWrite(motorPin4, HIGH);
-
-
+void turnleft(){ digitalWrite(motorPin1, HIGH); digitalWrite(motorPin2, LOW); digitalWrite(motorPin3, LOW); digitalWrite(motorPin4, HIGH);
 analogWrite(ENA,60);
 analogWrite(ENB,60);
 delay(50);
 }
 
 
-void turnright() {
-    digitalWrite(motorPin1, LOW); 
-digitalWrite(motorPin2, HIGH);
-digitalWrite(motorPin3, HIGH); 
-digitalWrite(motorPin4, LOW);
-
-
+void turnright() { digitalWrite(motorPin1, LOW); digitalWrite(motorPin2, HIGH); digitalWrite(motorPin3, HIGH); digitalWrite(motorPin4, LOW);
 analogWrite(ENA,60);
 analogWrite(ENB,60);
 delay(50);
 }
+
+void brasdown() {myservo.write(175);}
+void brasup() {myservo.write(90);}
+
+
+void exp2() {
+   for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo2.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(5);                       // waits 15ms for the servo to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    myservo2.write(pos);            // tell servo to go to position in variable 'pos'
+    delay(5);                       // waits 15ms for the servo to reach the position
+  }
+            }
