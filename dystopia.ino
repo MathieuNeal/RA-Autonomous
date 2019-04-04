@@ -153,7 +153,7 @@ exp2();
               }
 
 
-lastetat = EtatFourche;
+lastetat = EtatFourche;    
   } // FIN DU BOUTON
   
 } //// FIN DU VOIDLOOP
@@ -177,13 +177,13 @@ void brasup() {myservo.write(90);}
 
 
 void exp2() {
-   for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+   for (pos = 30; pos <= 150; pos += 1) { 
     // in steps of 1 degree
-    myservo2.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
+    myservo2.write(pos);              
+    delay(5);                       
   }
-  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-    myservo2.write(pos);            // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
-  }
+  for (pos = 150; pos >= 30; pos -= 1) { 
+    myservo2.write(pos);          
+delay(5); 
+}
             }
