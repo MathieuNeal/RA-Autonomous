@@ -37,6 +37,8 @@ emp = 0;
 
 pinMode(A5, INPUT_PULLUP);
 
+
+
   myservo2.attach(10); 
 
   myservo.attach(9);
@@ -54,7 +56,14 @@ digitalWrite(ENB,LOW);
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(inputPin, INPUT);     // declare pushbutton as input
 brasup();
-    delay(5000); 
+
+while(digitalRead (cale) == 0) {
+  digitalWrite(13, HIGH);
+  delay(20);
+  digitalWrite(13,LOW); }
+
+
+//    delay(5000); 
   Serial.println("On abaisse le bras");
 brasdown();
   
@@ -63,11 +72,6 @@ int cote = digitalRead(A5); // DEFINIR SENS DU SWITCH
 
 
 
-
-while(digitalRead (cale) != 0) {
-  digitalWrite(13, HIGH);
-  delay(20);
-  digitalWrite(13,LOW); }
 
 
 }
@@ -100,7 +104,7 @@ digitalWrite(ENB,LOW);
  if (cote == 1) { turnleft(); Serial.println("TOURNE A DROITE"); }
 
     
-    delay(2000);
+    delay(795);
  digitalWrite(motorPin1, HIGH); 
 digitalWrite(motorPin2, LOW);
 digitalWrite(motorPin3, HIGH); 
@@ -131,7 +135,7 @@ if (emp != 0) {
    
 Serial.print("          CMP: ");
 Serial.println(cmpfourche);
-while( cmpfourche > 40){
+while( cmpfourche > 40000){
  Serial.println("Mission accomplie");
 
 
@@ -164,8 +168,8 @@ delay(50);
 
 
 void turnright() { digitalWrite(motorPin1, LOW); digitalWrite(motorPin2, HIGH); digitalWrite(motorPin3, HIGH); digitalWrite(motorPin4, LOW);
-analogWrite(ENA,60);
-analogWrite(ENB,60);
+analogWrite(ENA,100);
+analogWrite(ENB,100);
 delay(50);
 }
 
@@ -177,10 +181,10 @@ void exp2() {
    for (pos = 30; pos <= 150; pos += 1) { 
     // in steps of 1 degree
     myservo2.write(pos);              
-    delay(5);                       
+    delay(10);                       
   }
   for (pos = 150; pos >= 30; pos -= 1) { 
     myservo2.write(pos);          
-delay(5); 
+delay(10); 
 }
             }
