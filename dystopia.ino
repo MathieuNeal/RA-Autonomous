@@ -26,6 +26,11 @@ const int fourchePin = 8;
 int EtatFourche = 0 ;
 int CMPFOURCHE1 = 0; 
 
+
+
+/Cale (FOURCHE OPTIQUE)
+int cale = 36;
+
 void setup() {
 pastservo=0;
 emp = 0;
@@ -55,9 +60,21 @@ digitalWrite(ENB,LOW);
   
    delay(1000); 
 int cote = digitalRead(A5); // DEFINIR SENS DU SWITCH
+
+
+///////////////////
+
+while(digitalRead (cale) != 0) {
+  digitalWrite(13, HIGH);
+  delay(20);
+  digitalWrite(13,LOW); }
+
+//////////////////
 }
 
 void loop(){
+
+
 
 
 if (pastservo != 1){
