@@ -53,12 +53,12 @@ digitalWrite(ENB,LOW);
   Serial.println("Initialisation");
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(inputPin, INPUT);     // declare pushbutton as input
-
-    delay(1000); 
+brasup();
+    delay(5000); 
   Serial.println("On abaisse le bras");
-  myservo.write(175);
+brasdown();
   
-   delay(1000); 
+   delay(2000); 
 int cote = digitalRead(A5); // DEFINIR SENS DU SWITCH
 
 
@@ -78,10 +78,7 @@ void loop(){
 
 
 if (pastservo != 1){
-//  delay(2000); 
-//  Serial.println("On abaisse le bras");
  brasdown();
- 
 }
 
 
@@ -108,8 +105,8 @@ digitalWrite(ENB,LOW);
 digitalWrite(motorPin2, LOW);
 digitalWrite(motorPin3, HIGH); 
 digitalWrite(motorPin4, LOW);
-analogWrite(ENA,60);
-analogWrite(ENB,60); 
+analogWrite(ENA,100);
+analogWrite(ENB,100); 
 emp = 1;
 Serial.println("Emp changé");
   /// ON APPUIE 
@@ -121,8 +118,8 @@ Serial.println("Emp changé");
 digitalWrite(motorPin2, HIGH);
 digitalWrite(motorPin3, LOW); 
 digitalWrite(motorPin4, HIGH);
-analogWrite(ENA,60);
-analogWrite(ENB,60); 
+analogWrite(ENA,100);
+analogWrite(ENB,100); 
  
 
 
@@ -160,8 +157,8 @@ lastetat = EtatFourche;
 
 
 void turnleft(){ digitalWrite(motorPin1, HIGH); digitalWrite(motorPin2, LOW); digitalWrite(motorPin3, LOW); digitalWrite(motorPin4, HIGH);
-analogWrite(ENA,60);
-analogWrite(ENB,60);
+analogWrite(ENA,100);
+analogWrite(ENB,100);
 delay(50);
 }
 
@@ -172,7 +169,7 @@ analogWrite(ENB,60);
 delay(50);
 }
 
-void brasdown() {myservo.write(175);}
+void brasdown() {myservo.write(170);}
 void brasup() {myservo.write(90);}
 
 
