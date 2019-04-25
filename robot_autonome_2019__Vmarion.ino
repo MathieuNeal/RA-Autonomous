@@ -104,7 +104,8 @@ void loop()
   int cote_depart;
   
   // si la cale de départ est enlevée du capteur à fourche on demarre la séquence du robot autonome
-	// la variable fin_du_cycle permet d'exécuter qu'une seuke fois la séquence de déplacement
+	// la variable fin_du_cycle permet d'exécuter qu'une seule fois la séquence de déplacement
+  
 	if (digitalRead(PIN_CALE) == CALE_ENLEVEE && fin_du_cycle == FAUX)
 	{
 		// on lit la position de l'interrupteur pour savoir de quel côté est le robot autonome : JAUNE ou VIOLET
@@ -124,7 +125,7 @@ void loop()
 		bras_experience_releve();
 		// atente de 0,5s avant de reculer
 		delay(500);	
-		// puis on repart en arrière pendant 1s
+		// puis on repart en arrière pendant 1a
 		marche_arriere();
 		delay(1000);
 		// et on arrête le robot
