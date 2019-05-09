@@ -21,7 +21,7 @@ void setup()
 
 if (cote == 1) {
 
-
+pinMode(5, OUTPUT);
   sensorA.init();
   sensorA.setTimeout(500);
   sensorA.setAddress(29);
@@ -31,6 +31,7 @@ if (cote == 1) {
   Serial.println(sensorA.getAddress());
   
 
+pinMode(5, INPUT);
   sensorB.init();
   sensorB.setTimeout(500);
   sensorB.setAddress(28);
@@ -59,11 +60,12 @@ Serial.print("Capteur du haut:   ");
     Serial.print(sensorA.readRangeContinuousMillimeters());
   if (sensorA.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
   delay(10);
-
+// digitalWrite(5, HIGH);
 Serial.print("               Capteur du bas:   ");
     Serial.println(sensorB.readRangeContinuousMillimeters());
   if (sensorB.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
-delay(10);  }
+delay(10);  
+}
 
 if (cote == 0){
 Serial.print("               Capteur du Milieu:   ");
