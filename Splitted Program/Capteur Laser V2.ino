@@ -11,14 +11,12 @@ The range readings are in units of mm. */
 VL53L0X sensorA;
 VL53L0X sensorB;
 void setup()
-{
-  pinMode(5, OUTPUT);
+{  pinMode(5, OUTPUT);
 
 
   Serial.begin(9600);
   Wire.begin();
 
-// INIT A 
 digitalWrite(5, LOW);
   sensorA.init();
   sensorA.setTimeout(500);
