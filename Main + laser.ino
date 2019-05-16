@@ -118,7 +118,13 @@ Servo servo_experience;     // servo de l'expérience
 // variable permettant d'effectuer le cycle de déplacement qu'une seule fois dans le programme principal (loop)
 int fin_du_cycle;
 
-float calcul; 
+float AVD;
+float ARD;
+float AVG;
+float ARG;
+
+float calculdroite; 
+float calculgauche;
 //*********************************************************************************************
 // Fonction SETUP
 //*********************************************************************************************
@@ -170,8 +176,7 @@ Serial.print("Etat du bouton");
 Serial.println(digitalRead(PIN_INTERRUPTEUR_COTE));
 delay(200);
  
-float calculdroite; 
-float calculgauche;
+
 
 } // fin du SETUP
 
@@ -294,21 +299,22 @@ void mesure_laser(){
 
 
     if (digitalRead(PIN_INTERRUPTEUR_COTE) == 0) {
-  Serial.print(" - distance AVD = "); Serial.print(Capteur_laser_AVD.readRangeSingleMillimeters());
-  Serial.print(" - distance ARD = "); Serial.print(Capteur_laser_ARD.readRangeSingleMillimeters());
-  delay(10);
+AVD = Capteur_laser_AVD.readRangeSingleMillimeters();
+ARD = Capteur_laser_ARD.readRangeSingleMillimeters(); 
+  Serial.print(" - distance AVD = "); Serial.print(AVD);
+  Serial.print(" - distance ARD = "); Serial.print(ARD);
+ calculdroite = AVD / ARD; 
   Serial.println("            Moyenne:  ");
- calculdroite = Capteur_laser_AVD.readRangeSingleMillimeters() / ( Capteur_laser_ARD.readRangeSingleMillimeters() * 1.2 ); 
  Serial.println(calculdroite); 
   }
 
 
   if (digitalRead(PIN_INTERRUPTEUR_COTE) == 1) {
-  Serial.print(" - distance AVG = "); Serial.print(Capteur_laser_AVG.readRangeSingleMillimeters());
-  Serial.print(" - distance ARG = "); Serial.print(Capteur_laser_ARG.readRangeSingleMillimeters());
-  delay(10);
-
- calculgauche = Capteur_laser_AVG.readRangeSingleMillimeters() / ( Capteur_laser_ARG.readRangeSingleMillimeters() * 1 );
+AVG = Capteur_laser_AVG.readRangeSingleMillimeters(); 
+ARG = Capteur_laser_ARG.readRangeSingleMillimeters();
+  Serial.print(" - distance AVG = "); Serial.print(AVG);
+  Serial.print(" - distance ARG = "); Serial.print(ARG);
+ calculgauche = AVG / ARG;
   Serial.println("            Moyenne:  ");
   Serial.println(calculgauche); 
   }  
