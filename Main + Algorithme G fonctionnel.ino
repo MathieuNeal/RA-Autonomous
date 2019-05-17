@@ -31,9 +31,9 @@
 #define POS_HAUTE_SERVO_EXPERIENCE  80    // angle en degré de la position haute du servo
 #define POS_BASSE_SERVO_EXPERIENCE  170   // angle en degré de la position basse du servo
 
-#define VITESSE_MOTEURS       100    // valeur de la PWM des 2 moteurs à changer pour ralentir ou accélérer le robot
-#define VITESSE_MOTEUR_GAUCHE 100    // valeur de la PWM du moteur GAUCHE
-#define VITESSE_MOTEUR_DROIT  100    // valeur de la PWM du moteur DROIT
+#define VITESSE_MOTEURS       150    // valeur de la PWM des 2 moteurs à changer pour ralentir ou accélérer le robot
+#define VITESSE_MOTEUR_GAUCHE 150    // valeur de la PWM du moteur GAUCHE
+#define VITESSE_MOTEUR_DROIT  150    // valeur de la PWM du moteur DROIT
 
 #define DIAMETRE_ROUE     65   // valeur en mm du diamètre des roues
 #define RAPPORT_REDUCTION 1    // Valeur du rapport de réduction ici 1 car par de reducteur
@@ -193,33 +193,38 @@ if (digitalRead(PIN_CALE_DEPART) == CALE_ENLEVEE && fin_du_cycle == FAUX)
 delay(500);
 
 if (digitalRead(PIN_INTERRUPTEUR_COTE) == 1) {
+
+if (calculdroite > 1.15 && calculdroite < 8000) {
+rotation_gauche();
+delay(100);
+arret_robot();
+Serial.println("ROTATION GAUCHE"); }
+
+if (calculdroite > 0 && calculdroite < 0.9) {
+rotation_droite();
+delay(100);
+arret_robot();
+Serial.println("ROTATION DEVANT INF DERRIERE"); } }
+
+if (digitalRead(PIN_INTERRUPTEUR_COTE) == 0) {
+
 if (calculgauche > 1.15 && calculgauche < 8000) {
 rotation_gauche();
-delay(20);
+delay(100);
 arret_robot();
 Serial.println("ROTATION GAUCHE"); }
 
 if (calculgauche > 0 && calculgauche < 0.9) {
 rotation_droite();
-delay(20);
+delay(100);
 arret_robot();
-Serial.println("ROTATION DEVANT INF DERRIERE"); } }
+Serial.println("ROTATION DEVANT INF DERRIERE"); }
 
 
-
-
-
-
-if (digitalRead(PIN_INTERRUPTEUR_COTE) == 0) {
-
-Serial.println("Rien pour l'instant");
-}
 
 
   }
-
-
-
+}
 
 
 }
